@@ -13,14 +13,26 @@
         android:theme="@style/Theme.CloudBudget"
         android:usesCleartextTraffic="true">
 
+        <!-- Splash Screen (Launcher) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.CloudBudget">
+            android:theme="@style/Theme.CloudBudget.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Onboarding -->
+        <activity
+            android:name=".ui.onboarding.OnboardingActivity"
+            android:theme="@style/Theme.CloudBudget" />
+
+        <!-- Main App -->
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.CloudBudget" />
+
     </application>
 </manifest>

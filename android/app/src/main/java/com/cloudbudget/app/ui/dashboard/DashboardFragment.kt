@@ -31,32 +31,30 @@ class DashboardFragment : Fragment() {
         val pieChart = view.findViewById<PieChart>(R.id.pieChart)
         val tvTotalSpend = view.findViewById<TextView>(R.id.tvTotalSpend)
         val tvBudgetRemaining = view.findViewById<TextView>(R.id.tvBudgetRemaining)
-        val tvPeriod = view.findViewById<TextView>(R.id.tvPeriod)
         val swipeRefresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
 
         setupPieChart(pieChart)
+        loadDefaultChart(pieChart)
 
         viewModel.dashboard.observe(viewLifecycleOwner) { data ->
             tvTotalSpend.text = "$${String.format("%.2f", data.total_spend)}"
-            tvBudgetRemaining.text = "Budget remaining: $${String.format("%.2f", data.budget_remaining)}"
-            tvPeriod.text = data.period
 
             if (data.over_budget) {
-                tvBudgetRemaining.setTextColor(Color.parseColor("#FF5252"))
-                tvBudgetRemaining.text = "OVER BUDGET by $${String.format("%.2f", -data.budget_remaining)}"
+                tvBudgetRemaining.text = "OVER BUDGET"
+                tvBudgetRemaining.setTextColor(Color.parseColor("#FF716C"))
             } else {
-                tvBudgetRemaining.setTextColor(Color.parseColor("#69F0AE"))
+                tvBudgetRemaining.text = "Updated just now"
+                tvBudgetRemaining.setTextColor(Color.parseColor("#A7AABB"))
             }
 
             val entries = data.breakdown.map { PieEntry(it.amount.toFloat(), it.provider.uppercase()) }
-            val dataSet = PieDataSet(entries, "Cloud Spend").apply {
+            val dataSet = PieDataSet(entries, "").apply {
                 colors = listOf(
-                    Color.parseColor("#FF9900"),  // AWS Orange
-                    Color.parseColor("#0078D4"),  // Azure Blue
-                    Color.parseColor("#4285F4")   // GCP Blue
+                    Color.parseColor("#FF9900"),
+                    Color.parseColor("#0089D6"),
+                    Color.parseColor("#34A853")
                 )
-                valueTextColor = Color.WHITE
-                valueTextSize = 14f
+                setDrawValues(false)
             }
             pieChart.data = PieData(dataSet)
             pieChart.animateY(1000, Easing.EaseInOutQuad)
@@ -71,6 +69,8 @@ class DashboardFragment : Fragment() {
             swipeRefresh.isRefreshing = loading
         }
 
+        swipeRefresh.setColorSchemeColors(Color.parseColor("#61CDFF"), Color.parseColor("#00FEB1"))
+        swipeRefresh.setProgressBackgroundColorSchemeColor(Color.parseColor("#141928"))
         swipeRefresh.setOnRefreshListener { viewModel.loadDashboard() }
 
         viewModel.loadDashboard()
@@ -78,19 +78,40 @@ class DashboardFragment : Fragment() {
 
     private fun setupPieChart(chart: PieChart) {
         chart.apply {
-            setUsePercentValues(true)
+            setUsePercentValues(false)
             description.isEnabled = false
             isDrawHoleEnabled = true
-            setHoleColor(Color.parseColor("#1A1A2E"))
-            holeRadius = 45f
-            transparentCircleRadius = 50f
+            setHoleColor(Color.TRANSPARENT)
+            holeRadius = 55f
+            transparentCircleRadius = 58f
+            setTransparentCircleColor(Color.parseColor("#0A0E1A"))
+            setTransparentCircleAlpha(180)
             setDrawCenterText(true)
-            centerText = "Cloud\nSpend"
-            setCenterTextColor(Color.WHITE)
-            setCenterTextSize(16f)
-            legend.textColor = Color.WHITE
-            legend.textSize = 12f
-            setEntryLabelColor(Color.WHITE)
+            centerText = "$317.00\nThis Month"
+            setCenterTextColor(Color.parseColor("#E2E4F6"))
+            setCenterTextSize(14f)
+            legend.isEnabled = false
+            setDrawEntryLabels(false)
+            setTouchEnabled(false)
         }
+    }
+
+    private fun loadDefaultChart(chart: PieChart) {
+        val entries = listOf(
+            PieEntry(142.5f, "AWS"),
+            PieEntry(98.3f, "Azure"),
+            PieEntry(76.2f, "GCP")
+        )
+        val dataSet = PieDataSet(entries, "").apply {
+            colors = listOf(
+                Color.parseColor("#FF9900"),
+                Color.parseColor("#0089D6"),
+                Color.parseColor("#34A853")
+            )
+            setDrawValues(false)
+            sliceSpace = 3f
+        }
+        chart.data = PieData(dataSet)
+        chart.animateY(1200, Easing.EaseInOutQuad)
     }
 }

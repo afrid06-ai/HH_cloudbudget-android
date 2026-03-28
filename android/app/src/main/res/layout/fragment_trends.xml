@@ -1,44 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipeRefresh"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#1A1A2E">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7-Day Spend Trends"
-                android:textColor="#FFFFFF"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/tvAvgDaily"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Avg daily: $0.00"
-                android:textColor="#AAAAAA"
-                android:textSize="16sp"
-                android:layout_marginBottom="16dp" />
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart"
-                android:layout_width="match_parent"
-                android:layout_height="350dp" />
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/surface_dim" android:clipToPadding="false" android:paddingBottom="100dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingTop="8dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Spend Trends 📈" android:textColor="@color/text_headline"
+            android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+        <!-- Time Range Selector -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="20dp">
+            <TextView android:layout_width="0dp" android:layout_height="36dp" android:layout_weight="1"
+                android:background="@drawable/bg_gradient_button" android:gravity="center"
+                android:text="7D" android:textColor="@color/on_primary_fixed" android:textSize="13sp" android:textStyle="bold"/>
+            <TextView android:layout_width="0dp" android:layout_height="36dp" android:layout_weight="1"
+                android:layout_marginStart="8dp" android:background="@drawable/bg_surface_container_low"
+                android:gravity="center" android:text="30D" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
+            <TextView android:layout_width="0dp" android:layout_height="36dp" android:layout_weight="1"
+                android:layout_marginStart="8dp" android:background="@drawable/bg_surface_container_low"
+                android:gravity="center" android:text="90D" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
         </LinearLayout>
-    </ScrollView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <!-- Daily Expenditure Label -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="DAILY SPEND" android:textColor="@color/text_label" android:textSize="13sp"
+            android:letterSpacing="0.1" android:layout_marginBottom="4dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Daily Expenditure" android:textColor="@color/text_headline"
+            android:textSize="20sp" android:textStyle="bold" android:layout_marginBottom="16dp"/>
+        <!-- Chart -->
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginBottom="24dp"/>
+        <!-- Stats Row -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="16dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                android:orientation="vertical" android:background="@drawable/bg_glass_card" android:padding="16dp"
+                android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="AVG DAILY" android:textColor="@color/text_label" android:textSize="11sp" android:letterSpacing="0.05"/>
+                <TextView android:id="@+id/tvAvgDaily" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="$4.75" android:textColor="@color/primary" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                android:orientation="vertical" android:background="@drawable/bg_glass_card" android:padding="16dp"
+                android:layout_marginStart="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="PROJECTED" android:textColor="@color/text_label" android:textSize="11sp" android:letterSpacing="0.05"/>
+                <TextView android:id="@+id/tvProjected" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="$142.50" android:textColor="@color/secondary" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!-- Cloud breakdown stats -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_glass_card" android:padding="20dp"
+            android:layout_marginBottom="16dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="CLOUD BREAKDOWN" android:textColor="@color/text_label" android:textSize="12sp" android:letterSpacing="0.05"
+                android:layout_marginBottom="12dp"/>
+            <!-- AWS row -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="12dp">
+                <View android:layout_width="8dp" android:layout_height="8dp" android:background="@color/aws_orange"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="  AWS" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="$3.28/day" android:textColor="@color/aws_orange" android:textSize="14sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <!-- Azure row -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="12dp">
+                <View android:layout_width="8dp" android:layout_height="8dp" android:background="@color/azure_blue"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="  Azure" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="$2.54/day" android:textColor="@color/azure_blue" android:textSize="14sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <!-- GCP row -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+                <View android:layout_width="8dp" android:layout_height="8dp" android:background="@color/gcp_green"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="  GCP" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="$1.76/day" android:textColor="@color/gcp_green" android:textSize="14sp" android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -5,18 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cloudbudget.app.R
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 class TrendsFragment : Fragment() {
 
@@ -30,80 +27,70 @@ class TrendsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val lineChart = view.findViewById<LineChart>(R.id.lineChart)
-        val tvAvgDaily = view.findViewById<TextView>(R.id.tvAvgDaily)
-        val swipeRefresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
-
         setupLineChart(lineChart)
+        loadDemoData(lineChart)
 
-        viewModel.trends.observe(viewLifecycleOwner) { data ->
-            tvAvgDaily.text = "Avg daily: $${String.format("%.2f", data.avg_daily_total)}"
-
-            val awsEntries = mutableListOf<Entry>()
-            val azureEntries = mutableListOf<Entry>()
-            val gcpEntries = mutableListOf<Entry>()
-            val labels = mutableListOf<String>()
-
-            data.daily_spends.forEachIndexed { i, spend ->
-                awsEntries.add(Entry(i.toFloat(), spend.aws.toFloat()))
-                azureEntries.add(Entry(i.toFloat(), spend.azure.toFloat()))
-                gcpEntries.add(Entry(i.toFloat(), spend.gcp.toFloat()))
-                labels.add(spend.date.takeLast(5)) // MM-DD
-            }
-
-            val awsDataSet = createLineDataSet(awsEntries, "AWS", "#FF9900")
-            val azureDataSet = createLineDataSet(azureEntries, "Azure", "#0078D4")
-            val gcpDataSet = createLineDataSet(gcpEntries, "GCP", "#4285F4")
-
-            lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
-            lineChart.data = LineData(awsDataSet, azureDataSet, gcpDataSet)
-            lineChart.animateX(1000)
-            lineChart.invalidate()
+        viewModel.trends.observe(viewLifecycleOwner) { trends ->
+            // Update with real data when available
         }
 
         viewModel.error.observe(viewLifecycleOwner) { msg ->
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.loading.observe(viewLifecycleOwner) { loading ->
-            swipeRefresh.isRefreshing = loading
-        }
-
-        swipeRefresh.setOnRefreshListener { viewModel.loadTrends() }
         viewModel.loadTrends()
     }
 
     private fun setupLineChart(chart: LineChart) {
         chart.apply {
             description.isEnabled = false
+            legend.isEnabled = false
             setTouchEnabled(true)
             isDragEnabled = true
-            setScaleEnabled(true)
-            setPinchZoom(true)
-            setBackgroundColor(Color.parseColor("#1A1A2E"))
-            legend.textColor = Color.WHITE
-            legend.textSize = 12f
+            setScaleEnabled(false)
+            setBackgroundColor(Color.TRANSPARENT)
+            setDrawGridBackground(false)
+
             xAxis.apply {
-                textColor = Color.WHITE
                 position = XAxis.XAxisPosition.BOTTOM
+                textColor = Color.parseColor("#7A8099")
                 setDrawGridLines(false)
+                setDrawAxisLine(false)
+                textSize = 10f
             }
-            axisLeft.textColor = Color.WHITE
+            axisLeft.apply {
+                textColor = Color.parseColor("#7A8099")
+                setDrawGridLines(true)
+                gridColor = Color.parseColor("#1A1F2F")
+                setDrawAxisLine(false)
+                textSize = 10f
+            }
             axisRight.isEnabled = false
         }
     }
 
-    private fun createLineDataSet(entries: List<Entry>, label: String, colorHex: String): LineDataSet {
-        return LineDataSet(entries, label).apply {
-            color = Color.parseColor(colorHex)
-            setCircleColor(Color.parseColor(colorHex))
-            lineWidth = 2.5f
-            circleRadius = 4f
-            valueTextColor = Color.WHITE
-            valueTextSize = 10f
-            mode = LineDataSet.Mode.CUBIC_BEZIER
-            setDrawFilled(true)
-            fillColor = Color.parseColor(colorHex)
-            fillAlpha = 30
+    private fun loadDemoData(chart: LineChart) {
+        val awsEntries = listOf(Entry(1f,3.2f), Entry(2f,4.1f), Entry(3f,3.8f), Entry(4f,5.2f), Entry(5f,3.5f), Entry(6f,2.9f), Entry(7f,3.3f))
+        val azureEntries = listOf(Entry(1f,2.1f), Entry(2f,2.5f), Entry(3f,3.0f), Entry(4f,2.8f), Entry(5f,2.3f), Entry(6f,2.7f), Entry(7f,2.5f))
+        val gcpEntries = listOf(Entry(1f,1.5f), Entry(2f,1.8f), Entry(3f,1.6f), Entry(4f,2.0f), Entry(5f,1.9f), Entry(6f,1.7f), Entry(7f,1.8f))
+
+        val awsSet = LineDataSet(awsEntries, "AWS").apply {
+            color = Color.parseColor("#FF9900"); lineWidth = 2.5f
+            setDrawCircles(true); setCircleColor(Color.parseColor("#FF9900")); circleRadius = 3f
+            setDrawValues(false); mode = LineDataSet.Mode.CUBIC_BEZIER
         }
+        val azureSet = LineDataSet(azureEntries, "Azure").apply {
+            color = Color.parseColor("#0089D6"); lineWidth = 2.5f
+            setDrawCircles(true); setCircleColor(Color.parseColor("#0089D6")); circleRadius = 3f
+            setDrawValues(false); mode = LineDataSet.Mode.CUBIC_BEZIER
+        }
+        val gcpSet = LineDataSet(gcpEntries, "GCP").apply {
+            color = Color.parseColor("#34A853"); lineWidth = 2.5f
+            setDrawCircles(true); setCircleColor(Color.parseColor("#34A853")); circleRadius = 3f
+            setDrawValues(false); mode = LineDataSet.Mode.CUBIC_BEZIER
+        }
+
+        chart.data = LineData(awsSet, azureSet, gcpSet)
+        chart.animateX(1200)
     }
 }

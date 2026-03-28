@@ -1,4 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CloudBudget</string>
+    <string name="tagline">One app. Three clouds.\nZero billing surprises.</string>
+    <string name="connecting">Connecting to your clouds…</string>
+    <string name="powered_by">POWERED BY</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_title_1">All Your Clouds. One Place.</string>
+    <string name="onboard_desc_1">Stop switching between AWS, Azure and GCP dashboards. CloudBudget shows all your cloud spending in one unified view.</string>
+    <string name="onboard_title_2">Smart Budget Alerts</string>
+    <string name="onboard_desc_2">Set budgets per cloud and get instant alerts when spending approaches your limits. Never be surprised by a bill again.</string>
+    <string name="onboard_title_3">Detect Waste Instantly</string>
+    <string name="onboard_desc_3">Our AI scans your infrastructure for idle resources, oversized instances, and unused storage — saving you money every day.</string>
+
+    <!-- Navigation -->
+    <string name="nav_dashboard">Home</string>
+    <string name="nav_budget">Budget</string>
+    <string name="nav_waste">Waste</string>
+    <string name="nav_alerts">Alerts</string>
+
+    <!-- Dashboard -->
+    <string name="total_spend_label">TOTAL SPEND THIS MONTH</string>
+    <string name="clouds_connected">3 clouds connected</string>
+    <string name="updated_just_now">Updated just now</string>
+    <string name="this_month">This Month</string>
+    <string name="aws_spend">AWS SPEND</string>
+    <string name="azure_spend">AZURE SPEND</string>
+    <string name="gcp_spend">GCP SPEND</string>
+    <string name="view_trends">View Trends</string>
+    <string name="set_budget">Set Budget</string>
+
+    <!-- Budget Manager -->
+    <string name="budget_manager">Budget Manager</string>
+    <string name="total_monthly_budget">TOTAL MONTHLY BUDGET</string>
+    <string name="auto_allocate">Auto Allocate</string>
+    <string name="allocation_breakdown">ALLOCATION BREAKDOWN</string>
+    <string name="on_track">ON TRACK</string>
+    <string name="monitor">MONITOR</string>
+    <string name="over_budget">OVER BUDGET</string>
+
+    <!-- Waste Detector -->
+    <string name="waste_detector">Waste Detector</string>
+    <string name="estimated_monthly_waste">ESTIMATED MONTHLY WASTE</string>
+    <string name="active_waste_vectors">ACTIVE WASTE VECTORS</string>
+
+    <!-- Spend Trends -->
+    <string name="spend_trends">Spend Trends</string>
+    <string name="daily_expenditure">Daily Expenditure</string>
+
+    <!-- Alerts -->
+    <string name="alerts_title">Alerts</string>
+    <string name="active_alerts">ACTIVE</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="account">ACCOUNT</string>
+    <string name="preferences">PREFERENCES</string>
+    <string name="security">SECURITY</string>
+    <string name="support">SUPPORT</string>
+    <string name="danger_zone">DANGER ZONE</string>
 </resources>

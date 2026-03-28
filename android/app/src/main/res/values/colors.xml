@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#E94560</color>
-    <color name="primary_dark">#C73E54</color>
-    <color name="background_dark">#1A1A2E</color>
-    <color name="surface_dark">#16213E</color>
-    <color name="on_surface">#FFFFFF</color>
-    <color name="aws_orange">#FF9900</color>
-    <color name="azure_blue">#0078D4</color>
-    <color name="gcp_blue">#4285F4</color>
-    <color name="success_green">#69F0AE</color>
-    <color name="error_red">#FF5252</color>
-    <color name="text_secondary">#AAAAAA</color>
-    <color name="ic_launcher_background">#16213E</color>
+    <!-- Primary: Electric Blue -->
+    <color name="primary">#FF61CDFF</color>
+    <color name="primary_dim">#FF00B2EB</color>
+    <color name="primary_fixed">#FF00C1FD</color>
+    <color name="primary_container">#FF00C1FD</color>
+    <color name="on_primary">#FF004259</color>
+    <color name="on_primary_fixed">#FF001E2B</color>
+
+    <!-- Secondary: Neon Green -->
+    <color name="secondary">#FF00FEB1</color>
+    <color name="secondary_dim">#FF00EEA6</color>
+    <color name="secondary_container">#FF006C49</color>
+    <color name="on_secondary">#FF005C3E</color>
+
+    <!-- Tertiary: AWS Orange -->
+    <color name="tertiary">#FFFFAC52</color>
+    <color name="tertiary_dim">#FFEB8D00</color>
+    <color name="tertiary_fixed">#FFFE9800</color>
+
+    <!-- Error -->
+    <color name="error">#FFFF716C</color>
+    <color name="error_dim">#FFD7383B</color>
+    <color name="error_container">#FF9F0519</color>
+
+    <!-- Surface: Deep Space Layers -->
+    <color name="surface">#FF0A0E1A</color>
+    <color name="surface_dim">#FF0A0E1A</color>
+    <color name="surface_container_lowest">#FF000000</color>
+    <color name="surface_container_low">#FF0E1320</color>
+    <color name="surface_container">#FF141928</color>
+    <color name="surface_container_high">#FF1A1F2F</color>
+    <color name="surface_container_highest">#FF202537</color>
+    <color name="surface_variant">#FF202537</color>
+    <color name="surface_bright">#FF252B3F</color>
+
+    <!-- On Surface -->
+    <color name="on_surface">#FFE2E4F6</color>
+    <color name="on_surface_variant">#FFA7AABB</color>
+    <color name="on_background">#FFE2E4F6</color>
+
+    <!-- Outline -->
+    <color name="outline">#FF717584</color>
+    <color name="outline_variant">#FF444756</color>
+
+    <!-- Cloud Brand Colors -->
+    <color name="aws_orange">#FFFF9900</color>
+    <color name="azure_blue">#FF0089D6</color>
+    <color name="gcp_green">#FF34A853</color>
+
+    <!-- Glass -->
+    <color name="glass_fill">#12FFFFFF</color>
+    <color name="glass_border">#26FFFFFF</color>
+    <color name="glass_fill_light">#0DFFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_headline">#FFE8EAF0</color>
+    <color name="text_label">#FF7A8099</color>
+    <color name="text_body">#FFA7AABB</color>
+
+    <!-- Launcher -->
+    <color name="ic_launcher_background">#FF0A0E1A</color>
+
+    <!-- Nav -->
+    <color name="nav_active">#FF00FEB1</color>
+    <color name="nav_inactive">#FF7A8099</color>
+
+    <!-- Gradients -->
+    <color name="gradient_start">#FF00C2FF</color>
+    <color name="gradient_end">#FF00FFB2</color>
+
+    <!-- Transparent overlays -->
+    <color name="white_7">#12FFFFFF</color>
+    <color name="white_15">#26FFFFFF</color>
+    <color name="primary_glow">#2661CDFF</color>
+    <color name="secondary_glow">#2600FEB1</color>
 </resources>

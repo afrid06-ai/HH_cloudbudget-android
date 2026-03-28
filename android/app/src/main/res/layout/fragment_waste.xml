@@ -1,46 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipeRefresh"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#1A1A2E">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Waste Detector"
-                android:textColor="#FFFFFF"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/tvTotalWaste"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Waste: $0.00/month"
-                android:textColor="#FF5252"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
-
-            <LinearLayout
-                android:id="@+id/llWasteItems"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/surface_dim" android:clipToPadding="false" android:paddingBottom="100dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingTop="8dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Waste Detector 🔥" android:textColor="@color/text_headline"
+            android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="24dp"/>
+        <!-- Hero Waste Card -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_glass_card_glow"
+            android:padding="24dp" android:layout_marginBottom="8dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="ESTIMATED MONTHLY WASTE" android:textColor="@color/on_surface_variant"
+                android:textSize="13sp" android:letterSpacing="0.1"/>
+            <TextView android:id="@+id/tvWasteAmount" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="$52.90"
+                android:textColor="@color/error" android:textSize="38sp" android:textStyle="bold"
+                android:layout_marginTop="4dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Across AWS, Azure and GCP" android:textColor="@color/on_surface_variant"
+                android:textSize="13sp" android:layout_marginTop="4dp"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="16dp">
+                <TextView android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1"
+                    android:layout_marginEnd="8dp" android:background="@drawable/bg_chip_secondary"
+                    android:gravity="center" android:text="🔍 3 idle resources found"
+                    android:textColor="@color/secondary" android:textSize="12sp" android:textStyle="bold"/>
+                <TextView android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1"
+                    android:layout_marginStart="8dp" android:background="@drawable/bg_chip_error"
+                    android:gravity="center" android:text="Fix all to save $52.90/mo"
+                    android:textColor="@color/error" android:textSize="12sp" android:textStyle="bold"/>
+            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <!-- Section Label -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="ACTIVE WASTE VECTORS" android:textColor="@color/on_surface_variant"
+            android:textSize="14sp" android:letterSpacing="0.05"
+            android:layout_marginTop="24dp" android:layout_marginBottom="16dp"/>
+        <!-- AWS Waste -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card_aws"
+            android:padding="20dp" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_error" android:paddingHorizontal="8dp" android:paddingVertical="2dp"
+                    android:text="AWS" android:textColor="@color/aws_orange" android:textSize="10sp" android:textStyle="bold"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Save $28.50" android:textColor="@color/secondary" android:textSize="13sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="EC2 t2.medium" android:textColor="@color/text_headline"
+                android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Running 24/7 — avg CPU below 5%" android:textColor="@color/on_surface_variant"
+                android:textSize="12sp" android:layout_marginTop="4dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="💡 Resize to t2.micro or stop instance" android:textColor="@color/text_label"
+                android:textSize="12sp" android:layout_marginTop="8dp"/>
+        </LinearLayout>
+        <!-- Azure Waste -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card_azure"
+            android:padding="20dp" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_tertiary" android:paddingHorizontal="8dp" android:paddingVertical="2dp"
+                    android:text="AZURE" android:textColor="@color/azure_blue" android:textSize="10sp" android:textStyle="bold"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Save $14.20" android:textColor="@color/secondary" android:textSize="13sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Standard_D2s VM" android:textColor="@color/text_headline"
+                android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Idle VM — 0 active connections in 7 days" android:textColor="@color/on_surface_variant"
+                android:textSize="12sp" android:layout_marginTop="4dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="💡 Deallocate VM or enable auto-shutdown" android:textColor="@color/text_label"
+                android:textSize="12sp" android:layout_marginTop="8dp"/>
+        </LinearLayout>
+        <!-- GCP Waste -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card_gcp"
+            android:padding="20dp" android:layout_marginBottom="24dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="8dp" android:paddingVertical="2dp"
+                    android:text="GCP" android:textColor="@color/gcp_green" android:textSize="10sp" android:textStyle="bold"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Save $10.20" android:textColor="@color/secondary" android:textSize="13sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="n1-standard-2 Instance" android:textColor="@color/text_headline"
+                android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Dev instance left running over weekend" android:textColor="@color/on_surface_variant"
+                android:textSize="12sp" android:layout_marginTop="4dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="💡 Enable auto-shutdown schedules" android:textColor="@color/text_label"
+                android:textSize="12sp" android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

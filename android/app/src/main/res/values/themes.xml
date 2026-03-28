@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.CloudBudget" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="colorPrimary">#E94560</item>
-        <item name="colorPrimaryContainer">#C73E54</item>
-        <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="android:colorBackground">#1A1A2E</item>
-        <item name="colorSurface">#16213E</item>
-        <item name="colorOnSurface">#FFFFFF</item>
-        <item name="android:statusBarColor">#1A1A2E</item>
-        <item name="android:navigationBarColor">#16213E</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="android:colorBackground">@color/surface_dim</item>
+        <item name="android:statusBarColor">@color/surface_dim</item>
+        <item name="android:navigationBarColor">@color/surface_dim</item>
+        <item name="android:windowBackground">@color/surface_dim</item>
+    </style>
+
+    <style name="Theme.CloudBudget.Splash" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/surface_dim</item>
+        <item name="android:statusBarColor">@color/surface_dim</item>
+        <item name="android:navigationBarColor">@color/surface_dim</item>
     </style>
 </resources>

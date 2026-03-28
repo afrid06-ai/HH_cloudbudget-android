@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_dim">
+
+    <!-- Skip button -->
+    <TextView
+        android:id="@+id/btnSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:padding="24dp"
+        android:text="Skip"
+        android:textColor="@color/on_surface_variant"
+        android:textSize="14sp" />
+
+    <!-- Main Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="32dp">
+
+        <!-- Glass illustration card -->
+        <FrameLayout
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_marginBottom="48dp"
+            android:background="@drawable/bg_glass_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- Phone with cloud icons -->
+                <TextView
+                    android:id="@+id/illustrationIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📱"
+                    android:textSize="48sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="☁"
+                        android:textSize="32sp"
+                        android:textColor="@color/secondary_dim" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  ☁  "
+                        android:textSize="32sp"
+                        android:textColor="@color/primary_fixed" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="☁"
+                        android:textSize="32sp"
+                        android:textColor="@color/tertiary" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/onboardTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onboard_title_1"
+            android:textColor="@color/on_surface"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:letterSpacing="0.02" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/onboardDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onboard_desc_1"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="8dp" />
+
+        <!-- Dots -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="40dp">
+
+            <View
+                android:id="@+id/dot1"
+                android:layout_width="32dp"
+                android:layout_height="8dp"
+                android:background="@drawable/bg_onboarding_dot_active" />
+            <View
+                android:id="@+id/dot2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_onboarding_dot_inactive" />
+            <View
+                android:id="@+id/dot3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_onboarding_dot_inactive" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom CTA -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="40dp">
+
+        <TextView
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_gradient_button"
+            android:gravity="center"
+            android:text="Next  →"
+            android:textColor="@color/on_primary_fixed"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+</FrameLayout>

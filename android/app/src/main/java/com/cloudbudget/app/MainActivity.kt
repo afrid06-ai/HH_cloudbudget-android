@@ -3,9 +3,9 @@ package com.cloudbudget.app
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.cloudbudget.app.ui.alerts.AlertsFragment
 import com.cloudbudget.app.ui.budget.BudgetFragment
 import com.cloudbudget.app.ui.dashboard.DashboardFragment
-import com.cloudbudget.app.ui.trends.TrendsFragment
 import com.cloudbudget.app.ui.waste.WasteFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_dashboard -> loadFragment(DashboardFragment())
                 R.id.nav_budget -> loadFragment(BudgetFragment())
                 R.id.nav_waste -> loadFragment(WasteFragment())
-                R.id.nav_trends -> loadFragment(TrendsFragment())
+                R.id.nav_alerts -> loadFragment(AlertsFragment())
                 else -> false
             }
         }
