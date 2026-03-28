@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.cloudbudget.app.MainActivity
 import com.cloudbudget.app.R
+import com.cloudbudget.app.data.DemoPreferences
+import com.cloudbudget.app.ui.auth.LoginActivity
 
 class OnboardingActivity : AppCompatActivity() {
 
@@ -71,7 +72,8 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun goToMain() {
-        startActivity(Intent(this, MainActivity::class.java))
+        DemoPreferences.setOnboardingDone(this, true)
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 }

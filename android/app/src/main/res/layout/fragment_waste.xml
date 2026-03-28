@@ -1,35 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/surface_dim" android:clipToPadding="false" android:paddingBottom="100dp">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingTop="8dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Waste Detector 🔥" android:textColor="@color/text_headline"
-            android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="24dp"/>
-        <!-- Hero Waste Card -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_glass_card_glow"
-            android:padding="24dp" android:layout_marginBottom="8dp">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="ESTIMATED MONTHLY WASTE" android:textColor="@color/on_surface_variant"
-                android:textSize="13sp" android:letterSpacing="0.1"/>
-            <TextView android:id="@+id/tvWasteAmount" android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:text="$0.00"
-                android:textColor="@color/error" android:textSize="38sp" android:textStyle="bold"
-                android:layout_marginTop="4dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Across AWS, Azure and GCP" android:textColor="@color/on_surface_variant"
-                android:textSize="13sp" android:layout_marginTop="4dp"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_constellation"
+    android:clipToPadding="false"
+    android:paddingBottom="108dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="22dp"
+        android:paddingTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:letterSpacing="-0.02"
+                android:text="Waste Detector 🔥"
+                android:textColor="@color/on_surface"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnHeaderSettings"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:text="⚙"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="20sp" />
+
+            <FrameLayout
+                android:id="@+id/btnHeaderProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_gradient_button" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="RJ"
+                    android:textColor="@color/on_primary_fixed"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="end|bottom"
+                    android:background="@drawable/dot_online" />
+            </FrameLayout>
         </LinearLayout>
-        <!-- Section Label -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="ACTIVE WASTE VECTORS" android:textColor="@color/on_surface_variant"
-            android:textSize="14sp" android:letterSpacing="0.05"
-            android:layout_marginTop="24dp" android:layout_marginBottom="16dp"/>
-        <!-- Dynamic waste cards container -->
-        <LinearLayout android:id="@+id/wasteCardsContainer"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/bg_glass_card_glow"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.1"
+                android:text="Estimated monthly waste"
+                android:textAllCaps="true"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvWasteAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:letterSpacing="-0.03"
+                android:text="$0.00"
+                android:textColor="@color/error"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Across AWS, Azure and GCP"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:letterSpacing="0.08"
+            android:text="Active waste vectors"
+            android:textAllCaps="true"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/wasteCardsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
     </LinearLayout>
 </ScrollView>

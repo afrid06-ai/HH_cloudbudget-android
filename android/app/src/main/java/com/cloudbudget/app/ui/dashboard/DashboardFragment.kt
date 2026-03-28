@@ -1,6 +1,7 @@
 package com.cloudbudget.app.ui.dashboard
 
 import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.cloudbudget.app.MainActivity
 import com.cloudbudget.app.R
+import com.cloudbudget.app.ui.detail.CloudDetailActivity
+import com.cloudbudget.app.ui.settings.ProfileActivity
+import com.cloudbudget.app.ui.settings.SettingsActivity
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -77,6 +82,29 @@ class DashboardFragment : Fragment() {
         swipeRefresh.setColorSchemeColors(Color.parseColor("#61CDFF"), Color.parseColor("#00FEB1"))
         swipeRefresh.setProgressBackgroundColorSchemeColor(Color.parseColor("#141928"))
         swipeRefresh.setOnRefreshListener { viewModel.loadDashboard() }
+
+        view.findViewById<TextView>(R.id.btnViewTrends).setOnClickListener {
+            (activity as? MainActivity)?.selectTab(R.id.nav_trends)
+        }
+        view.findViewById<TextView>(R.id.btnSetBudget).setOnClickListener {
+            (activity as? MainActivity)?.selectTab(R.id.nav_budget)
+        }
+
+        view.findViewById<View>(R.id.btnSettings).setOnClickListener {
+            startActivity(Intent(requireContext(), SettingsActivity::class.java))
+        }
+        view.findViewById<View>(R.id.btnProfileHeader).setOnClickListener {
+            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+        }
+        view.findViewById<View>(R.id.cardAws).setOnClickListener {
+            startActivity(CloudDetailActivity.intent(requireContext(), "aws"))
+        }
+        view.findViewById<View>(R.id.cardAzure).setOnClickListener {
+            startActivity(CloudDetailActivity.intent(requireContext(), "azure"))
+        }
+        view.findViewById<View>(R.id.cardGcp).setOnClickListener {
+            startActivity(CloudDetailActivity.intent(requireContext(), "gcp"))
+        }
     }
 
     private fun formatChange(tv: TextView, change: Double) {
@@ -94,7 +122,7 @@ class DashboardFragment : Fragment() {
     private fun updateChart(chart: PieChart, aws: Float, azure: Float, gcp: Float, total: Double) {
         val entries = listOf(PieEntry(aws, "AWS"), PieEntry(azure, "Azure"), PieEntry(gcp, "GCP"))
         val dataSet = PieDataSet(entries, "").apply {
-            colors = listOf(Color.parseColor("#FF9900"), Color.parseColor("#0089D6"), Color.parseColor("#34A853"))
+            colors = listOf(Color.parseColor("#FFAC52"), Color.parseColor("#61CDFF"), Color.parseColor("#00EEA6"))
             setDrawValues(false)
             sliceSpace = 3f
         }
@@ -111,7 +139,7 @@ class DashboardFragment : Fragment() {
             setHoleColor(Color.TRANSPARENT)
             holeRadius = 55f
             transparentCircleRadius = 58f
-            setTransparentCircleColor(Color.parseColor("#0A0E1A"))
+            setTransparentCircleColor(Color.parseColor("#0E1320"))
             setTransparentCircleAlpha(180)
             setDrawCenterText(true)
             setCenterTextColor(Color.parseColor("#E2E4F6"))

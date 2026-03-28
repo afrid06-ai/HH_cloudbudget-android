@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.LiveData
@@ -15,6 +16,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cloudbudget.app.R
 import com.cloudbudget.app.data.firebase.FirestoreRepository
+import com.cloudbudget.app.ui.detail.AlertDetailActivity
+import com.cloudbudget.app.ui.util.bindStitchHeader
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
@@ -38,6 +41,9 @@ class AlertsViewModel : ViewModel() {
 class AlertsFragment : Fragment() {
 
     private lateinit var viewModel: AlertsViewModel
+    private var lastAlerts: List<FirestoreRepository.AlertItem> = emptyList()
+    /** null = All, else aws | azure | gcp */
+    private var filterProvider: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_alerts, container, false)
@@ -50,13 +56,51 @@ class AlertsFragment : Fragment() {
         val alertsContainer = view.findViewById<LinearLayout>(R.id.alertsContainer)
         val tvActiveCount = view.findViewById<TextView>(R.id.tvActiveCount)
 
-        viewModel.alerts.observe(viewLifecycleOwner) { alerts ->
-            tvActiveCount?.text = "${alerts.size} ACTIVE"
-            alertsContainer?.removeAllViews()
-            alerts.forEach { alert ->
-                alertsContainer?.addView(buildAlertCard(alert))
+        val filterAll = view.findViewById<TextView>(R.id.filterAll)
+        val filterAws = view.findViewById<TextView>(R.id.filterAws)
+        val filterAzure = view.findViewById<TextView>(R.id.filterAzure)
+        val filterGcp = view.findViewById<TextView>(R.id.filterGcp)
+
+        fun styleFilters(selected: String?) {
+            val selBg = R.drawable.bg_gradient_button
+            val unselBg = R.drawable.bg_glass_card_soft
+            val selCol = ContextCompat.getColor(requireContext(), R.color.on_primary_fixed)
+            val unselCol = ContextCompat.getColor(requireContext(), R.color.on_surface_variant)
+            fun style(tv: TextView, key: String?) {
+                val on = selected == key
+                tv.setBackgroundResource(if (on) selBg else unselBg)
+                tv.setTextColor(if (on) selCol else unselCol)
             }
+            style(filterAll, null)
+            style(filterAws, "aws")
+            style(filterAzure, "azure")
+            style(filterGcp, "gcp")
         }
+
+        fun filtered(): List<FirestoreRepository.AlertItem> {
+            val p = filterProvider ?: return lastAlerts
+            return lastAlerts.filter { it.provider.equals(p, ignoreCase = true) }
+        }
+
+        fun render() {
+            val list = filtered()
+            tvActiveCount?.text = "${list.size} ACTIVE"
+            alertsContainer?.removeAllViews()
+            list.forEach { alertsContainer?.addView(buildAlertCard(it)) }
+        }
+
+        filterAll.setOnClickListener { filterProvider = null; styleFilters(filterProvider); render() }
+        filterAws.setOnClickListener { filterProvider = "aws"; styleFilters(filterProvider); render() }
+        filterAzure.setOnClickListener { filterProvider = "azure"; styleFilters(filterProvider); render() }
+        filterGcp.setOnClickListener { filterProvider = "gcp"; styleFilters(filterProvider); render() }
+
+        viewModel.alerts.observe(viewLifecycleOwner) { alerts ->
+            lastAlerts = alerts
+            render()
+        }
+
+        styleFilters(filterProvider)
+        bindStitchHeader(view)
     }
 
     private fun buildAlertCard(alert: FirestoreRepository.AlertItem): View {
@@ -73,7 +117,6 @@ class AlertsFragment : Fragment() {
             }
         }
 
-        // Header
         val header = LinearLayout(ctx).apply { gravity = android.view.Gravity.CENTER_VERTICAL }
         val (icon, chipColor, chipBg) = when (alert.severity) {
             "critical" -> Triple("🔴 CRITICAL", Color.parseColor("#FF716C"), R.drawable.bg_chip_error)
@@ -106,6 +149,19 @@ class AlertsFragment : Fragment() {
             setTypeface(null, android.graphics.Typeface.BOLD)
             setPadding(0, dp(8), 0, 0)
         })
+
+        card.setOnClickListener {
+            startActivity(
+                AlertDetailActivity.intent(
+                    requireContext(),
+                    title = alert.title,
+                    description = alert.description,
+                    severity = alert.severity,
+                    provider = alert.provider,
+                    timeAgo = alert.timeAgo
+                )
+            )
+        }
 
         return card
     }

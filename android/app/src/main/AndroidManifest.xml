@@ -34,5 +34,15 @@
             android:name=".MainActivity"
             android:theme="@style/Theme.CloudBudget" />
 
+        <activity android:name=".ui.auth.LoginActivity" android:theme="@style/Theme.CloudBudget" />
+        <activity android:name=".ui.auth.CloudCredentialsActivity" android:theme="@style/Theme.CloudBudget" />
+        <activity android:name=".ui.settings.SettingsActivity" android:theme="@style/Theme.CloudBudget" />
+        <activity android:name=".ui.settings.ProfileActivity" android:theme="@style/Theme.CloudBudget" />
+        <activity android:name=".ui.settings.ManageCloudsActivity" android:theme="@style/Theme.CloudBudget" />
+        <activity android:name=".ui.settings.NotificationPreferencesActivity" android:theme="@style/Theme.CloudBudget" />
+        <activity android:name=".ui.settings.SecuritySettingsActivity" android:theme="@style/Theme.CloudBudget" />
+        <activity android:name=".ui.detail.AlertDetailActivity" android:theme="@style/Theme.CloudBudget" />
+        <activity android:name=".ui.detail.CloudDetailActivity" android:theme="@style/Theme.CloudBudget" />
+
     </application>
 </manifest>

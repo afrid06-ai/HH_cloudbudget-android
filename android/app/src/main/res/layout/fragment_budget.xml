@@ -1,93 +1,436 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/surface_dim" android:clipToPadding="false" android:paddingBottom="100dp">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingTop="8dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Budget Manager 💰" android:textColor="@color/text_headline"
-            android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="24dp"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_glass_card_glow"
-            android:padding="32dp" android:gravity="center" android:layout_marginBottom="32dp">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="TOTAL MONTHLY BUDGET" android:textColor="@color/on_surface_variant"
-                android:textSize="13sp" android:letterSpacing="0.1"/>
-            <TextView android:id="@+id/tvBudgetAmount" android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:text="$500.00"
-                android:textColor="@color/on_surface" android:textSize="34sp" android:textStyle="bold"
-                android:layout_marginTop="8dp"/>
-            <TextView android:id="@+id/btnAutoAllocate" android:layout_width="wrap_content"
-                android:layout_height="48dp" android:layout_marginTop="16dp"
-                android:background="@drawable/bg_gradient_button" android:gravity="center"
-                android:paddingHorizontal="32dp" android:text="⚡ Auto Allocate →"
-                android:textColor="@color/on_primary_fixed" android:textSize="14sp" android:textStyle="bold"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_constellation"
+    android:clipToPadding="false"
+    android:paddingBottom="108dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="22dp"
+        android:paddingTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:letterSpacing="-0.02"
+                android:text="Budget Manager 💰"
+                android:textColor="@color/on_surface"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnHeaderSettings"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:text="⚙"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="20sp" />
+
+            <FrameLayout
+                android:id="@+id/btnHeaderProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_gradient_button" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="RJ"
+                    android:textColor="@color/on_primary_fixed"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="end|bottom"
+                    android:background="@drawable/dot_online" />
+            </FrameLayout>
         </LinearLayout>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="ALLOCATION BREAKDOWN" android:textColor="@color/on_surface_variant"
-            android:textSize="14sp" android:letterSpacing="0.05" android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/bg_glass_card_glow"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.1"
+                android:text="Total monthly budget"
+                android:textAllCaps="true"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvBudgetAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:letterSpacing="-0.02"
+                android:text="$500.00"
+                android:textColor="@color/on_surface"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnAutoAllocate"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/bg_gradient_button"
+                android:gravity="center"
+                android:paddingHorizontal="28dp"
+                android:text="⚡ Auto allocate →"
+                android:textColor="@color/on_primary_fixed"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:letterSpacing="0.08"
+            android:text="Allocation breakdown"
+            android:textAllCaps="true"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
         <!-- AWS -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_card_aws"
-            android:padding="20dp" android:layout_marginBottom="16dp">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="☁" android:textSize="24sp" android:textColor="@color/tertiary"/>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AWS Instance" android:textColor="@color/text_headline" android:textSize="15sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cloud Infrastructure" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/bg_card_aws"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="☁"
+                    android:textColor="@color/tertiary"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AWS Instance"
+                        android:textColor="@color/text_headline"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cloud infrastructure"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="12sp" />
                 </LinearLayout>
-                <TextView android:id="@+id/tvAwsStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="✅ ON TRACK" android:textColor="@color/secondary" android:textSize="10sp" android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvAwsStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_secondary"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="✅ ON TRACK"
+                    android:textColor="@color/secondary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Allocated: $225.00" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
-                <TextView android:id="@+id/tvAwsBudgetSpent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $142.50" android:textColor="@color/tertiary" android:textSize="14sp" android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Allocated: $225.00"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvAwsBudgetSpent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spent: $142.50"
+                    android:textColor="@color/tertiary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-            <FrameLayout android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="12dp" android:background="@drawable/bg_progress_track">
-                <View android:id="@+id/awsProgressBar" android:layout_width="0dp" android:layout_height="match_parent" android:background="@drawable/bg_progress_fill"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_progress_track">
+
+                <View
+                    android:id="@+id/awsProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_progress_fill" />
             </FrameLayout>
-            <TextView android:id="@+id/tvAwsRemaining" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$82.50 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvAwsRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="$82.50 remaining · 63% used"
+                android:textColor="@color/secondary"
+                android:textSize="12sp" />
         </LinearLayout>
+
         <!-- Azure -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_card_azure"
-            android:padding="20dp" android:layout_marginBottom="16dp">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🖥" android:textSize="24sp"/>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Azure Services" android:textColor="@color/text_headline" android:textSize="15sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Storage &amp; SQL" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/bg_card_azure"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🖥"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Azure Services"
+                        android:textColor="@color/text_headline"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Storage &amp; SQL"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="12sp" />
                 </LinearLayout>
-                <TextView android:id="@+id/tvAzureStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_tertiary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="⚠️ MONITOR" android:textColor="@color/tertiary" android:textSize="10sp" android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvAzureStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_tertiary"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="⚠️ MONITOR"
+                    android:textColor="@color/tertiary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Allocated: $155.00" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
-                <TextView android:id="@+id/tvAzureBudgetSpent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $98.30" android:textColor="@color/primary" android:textSize="14sp" android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Allocated: $155.00"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvAzureBudgetSpent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spent: $98.30"
+                    android:textColor="@color/primary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-            <FrameLayout android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="12dp" android:background="@drawable/bg_progress_track">
-                <View android:id="@+id/azureProgressBar" android:layout_width="0dp" android:layout_height="match_parent" android:background="@drawable/bg_progress_fill"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_progress_track">
+
+                <View
+                    android:id="@+id/azureProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_progress_fill" />
             </FrameLayout>
-            <TextView android:id="@+id/tvAzureRemaining" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$56.70 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvAzureRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="$56.70 remaining · 63% used"
+                android:textColor="@color/secondary"
+                android:textSize="12sp" />
         </LinearLayout>
+
         <!-- GCP -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_card_gcp"
-            android:padding="20dp" android:layout_marginBottom="24dp">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📊" android:textSize="24sp"/>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GCP Platform" android:textColor="@color/text_headline" android:textSize="15sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AI &amp; Analytics" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_card_gcp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📊"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GCP Platform"
+                        android:textColor="@color/text_headline"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AI &amp; Analytics"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="12sp" />
                 </LinearLayout>
-                <TextView android:id="@+id/tvGcpStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="✅ ON TRACK" android:textColor="@color/secondary" android:textSize="10sp" android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvGcpStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_secondary"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="✅ ON TRACK"
+                    android:textColor="@color/secondary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Allocated: $120.00" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
-                <TextView android:id="@+id/tvGcpBudgetSpent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $76.20" android:textColor="@color/secondary" android:textSize="14sp" android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Allocated: $120.00"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvGcpBudgetSpent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spent: $76.20"
+                    android:textColor="@color/secondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-            <FrameLayout android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="12dp" android:background="@drawable/bg_progress_track">
-                <View android:id="@+id/gcpProgressBar" android:layout_width="0dp" android:layout_height="match_parent" android:background="@drawable/bg_progress_fill"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_progress_track">
+
+                <View
+                    android:id="@+id/gcpProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_progress_fill" />
             </FrameLayout>
-            <TextView android:id="@+id/tvGcpRemaining" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$43.80 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvGcpRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="$43.80 remaining · 63% used"
+                android:textColor="@color/secondary"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

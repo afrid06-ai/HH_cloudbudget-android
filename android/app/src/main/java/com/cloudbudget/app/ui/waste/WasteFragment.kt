@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cloudbudget.app.R
+import com.cloudbudget.app.ui.util.bindStitchHeader
 import com.cloudbudget.app.data.firebase.FirestoreRepository
 
 class WasteFragment : Fragment() {
@@ -41,6 +42,8 @@ class WasteFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner) { msg ->
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
         }
+
+        bindStitchHeader(view)
     }
 
     private fun buildWasteCard(item: FirestoreRepository.WasteItem): View {

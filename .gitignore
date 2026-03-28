@@ -11,6 +11,8 @@ local.properties
 *.iml
 .idea/
 *.apk
+# Ignore accidental google-services outside app/; android/app/google-services.json is committed as a local placeholder.
 google-services.json
+!android/app/google-services.json
 
 backend/.venv/

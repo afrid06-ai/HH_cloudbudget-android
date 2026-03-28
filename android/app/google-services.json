@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "146691390158",
+    "project_id": "cloudbudget-6271d",
+    "storage_bucket": "cloudbudget-6271d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146691390158:android:2274bfc85c30b60a762e9f",
+        "android_client_info": {
+          "package_name": "com.cloudbudget.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLH2pZhVCiLr4jmfCXowbu2kj2wp3KUrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

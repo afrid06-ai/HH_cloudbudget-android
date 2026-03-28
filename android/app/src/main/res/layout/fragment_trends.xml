@@ -1,88 +1,398 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/surface_dim" android:clipToPadding="false" android:paddingBottom="100dp">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingTop="8dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Spend Trends 📈" android:textColor="@color/text_headline"
-            android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
-        <!-- Time Range Selector -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal" android:layout_marginBottom="20dp">
-            <TextView android:layout_width="0dp" android:layout_height="36dp" android:layout_weight="1"
-                android:background="@drawable/bg_gradient_button" android:gravity="center"
-                android:text="7D" android:textColor="@color/on_primary_fixed" android:textSize="13sp" android:textStyle="bold"/>
-            <TextView android:layout_width="0dp" android:layout_height="36dp" android:layout_weight="1"
-                android:layout_marginStart="8dp" android:background="@drawable/bg_surface_container_low"
-                android:gravity="center" android:text="30D" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
-            <TextView android:layout_width="0dp" android:layout_height="36dp" android:layout_weight="1"
-                android:layout_marginStart="8dp" android:background="@drawable/bg_surface_container_low"
-                android:gravity="center" android:text="90D" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
-        </LinearLayout>
-        <!-- Daily Expenditure Label -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="DAILY SPEND" android:textColor="@color/text_label" android:textSize="13sp"
-            android:letterSpacing="0.1" android:layout_marginBottom="4dp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Daily Expenditure" android:textColor="@color/text_headline"
-            android:textSize="20sp" android:textStyle="bold" android:layout_marginBottom="16dp"/>
-        <!-- Chart -->
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_constellation"
+    android:clipToPadding="false"
+    android:paddingBottom="108dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="22dp"
+        android:paddingTop="12dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginBottom="24dp"/>
-        <!-- Stats Row -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal" android:layout_marginBottom="16dp">
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                android:orientation="vertical" android:background="@drawable/bg_glass_card" android:padding="16dp"
-                android:layout_marginEnd="6dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="AVG DAILY" android:textColor="@color/text_label" android:textSize="11sp" android:letterSpacing="0.05"/>
-                <TextView android:id="@+id/tvAvgDaily" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="$4.75" android:textColor="@color/primary" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="4dp"/>
-            </LinearLayout>
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                android:orientation="vertical" android:background="@drawable/bg_glass_card" android:padding="16dp"
-                android:layout_marginStart="6dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="PROJECTED" android:textColor="@color/text_label" android:textSize="11sp" android:letterSpacing="0.05"/>
-                <TextView android:id="@+id/tvProjected" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="$142.50" android:textColor="@color/secondary" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="4dp"/>
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:letterSpacing="-0.02"
+                android:text="Spend Trends 📈"
+                android:textColor="@color/on_surface"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnHeaderSettings"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:text="⚙"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="20sp" />
+
+            <FrameLayout
+                android:id="@+id/btnHeaderProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_gradient_button" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="RJ"
+                    android:textColor="@color/on_primary_fixed"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="end|bottom"
+                    android:background="@drawable/dot_online" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pill7d"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_gradient_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="7D"
+                android:textColor="@color/on_primary_fixed"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/pill30d"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_glass_card_soft"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="30D"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/pill90d"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_glass_card_soft"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="90D"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.1"
+            android:text="Daily spend"
+            android:textAllCaps="true"
+            android:textColor="@color/text_label"
+            android:textSize="11sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="14dp"
+            android:text="Daily expenditure"
+            android:textColor="@color/text_headline"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_glass_card_soft"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="220dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@color/tertiary" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:letterSpacing="0.06"
+                        android:text="AWS"
+                        android:textAllCaps="true"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@color/primary" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:letterSpacing="0.06"
+                        android:text="AZURE"
+                        android:textAllCaps="true"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@color/secondary_dim" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:letterSpacing="0.06"
+                        android:text="GCP"
+                        android:textAllCaps="true"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <!-- Cloud breakdown stats -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_glass_card" android:padding="20dp"
-            android:layout_marginBottom="16dp">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="CLOUD BREAKDOWN" android:textColor="@color/text_label" android:textSize="12sp" android:letterSpacing="0.05"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_glass_card_soft"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.06"
+                    android:text="Avg daily"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_label"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvAvgDaily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="$4.75"
+                    android:textColor="@color/primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_glass_card_soft"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.06"
+                    android:text="Projected"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_label"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvProjected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="$142.50"
+                    android:textColor="@color/secondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_glass_card_soft"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.06"
+                android:text="Cloud breakdown"
+                android:textAllCaps="true"
+                android:textColor="@color/text_label"
+                android:textSize="11sp"
                 android:layout_marginBottom="12dp"/>
-            <!-- AWS row -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="12dp">
-                <View android:layout_width="8dp" android:layout_height="8dp" android:background="@color/aws_orange"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                    android:text="  AWS" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="$3.28/day" android:textColor="@color/aws_orange" android:textSize="14sp" android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@color/aws_orange" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="AWS"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="13sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$3.28/day"
+                    android:textColor="@color/aws_orange"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-            <!-- Azure row -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="12dp">
-                <View android:layout_width="8dp" android:layout_height="8dp" android:background="@color/azure_blue"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                    android:text="  Azure" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="$2.54/day" android:textColor="@color/azure_blue" android:textSize="14sp" android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@color/azure_blue" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Azure"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="13sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$2.54/day"
+                    android:textColor="@color/azure_blue"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-            <!-- GCP row -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-                <View android:layout_width="8dp" android:layout_height="8dp" android:background="@color/gcp_green"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                    android:text="  GCP" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="$1.76/day" android:textColor="@color/gcp_green" android:textSize="14sp" android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@color/gcp_green" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="GCP"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="13sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$1.76/day"
+                    android:textColor="@color/gcp_green"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -15,6 +15,9 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.cloudbudget.app.R
+import com.cloudbudget.app.MainActivity
+import com.cloudbudget.app.data.DemoPreferences
+import com.cloudbudget.app.ui.auth.LoginActivity
 import com.cloudbudget.app.ui.onboarding.OnboardingActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -96,9 +99,19 @@ class SplashActivity : AppCompatActivity() {
         // Phase 6: Status text color cycling
         animateStatusText(tvStatus)
 
-        // Navigate after animations complete
+        // Navigate after animations complete (demo: resume session if already logged in)
         handler.postDelayed({
-            startActivity(Intent(this, OnboardingActivity::class.java))
+            when {
+                DemoPreferences.isLoggedIn(this) ->
+                    startActivity(
+                        Intent(this, MainActivity::class.java)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
+                DemoPreferences.hasCompletedOnboarding(this) ->
+                    startActivity(Intent(this, LoginActivity::class.java))
+                else ->
+                    startActivity(Intent(this, OnboardingActivity::class.java))
+            }
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }, 3500)

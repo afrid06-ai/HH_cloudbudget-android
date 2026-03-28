@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cloudbudget.app.R
+import com.cloudbudget.app.ui.util.bindStitchHeader
 
 class BudgetFragment : Fragment() {
 
@@ -45,6 +46,12 @@ class BudgetFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner) { msg ->
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
         }
+
+        view.findViewById<TextView>(R.id.btnAutoAllocate).setOnClickListener {
+            Toast.makeText(requireContext(), R.string.demo_auto_allocate, Toast.LENGTH_LONG).show()
+        }
+
+        bindStitchHeader(view)
     }
 
     private fun setProgress(bar: View, spent: Double, allocated: Double) {
