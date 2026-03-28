@@ -11,5 +11,6 @@ local.properties
 *.iml
 .idea/
 *.apk
+google-services.json
 
 backend/.venv/

@@ -37,9 +37,9 @@ class SplashActivity : AppCompatActivity() {
         val particleContainer = findViewById<FrameLayout>(R.id.particleContainer)
 
         // Seed Firestore demo data in background
-        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+        Thread {
             try { com.cloudbudget.app.data.firebase.FirestoreRepository.seedIfEmpty() } catch (_: Exception) {}
-        }
+        }.start()
 
         // Spawn floating particles
         spawnParticles(particleContainer)

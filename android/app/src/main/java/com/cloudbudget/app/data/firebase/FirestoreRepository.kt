@@ -5,7 +5,6 @@ import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.tasks.await
 
 object FirestoreRepository {
 
@@ -179,74 +178,90 @@ object FirestoreRepository {
     }
 
     // ─── Seed Demo Data ───
-    suspend fun seedIfEmpty() {
-        val dashDoc = db.collection("dashboard").document("current").get().await()
+    fun seedIfEmpty() {
+        val dashDoc = com.google.android.gms.tasks.Tasks.await(
+            db.collection("dashboard").document("current").get()
+        )
         if (dashDoc.exists()) return
 
         // Dashboard
-        db.collection("dashboard").document("current").set(mapOf(
-            "totalSpend" to 317.0,
-            "awsSpend" to 142.5,
-            "azureSpend" to 98.3,
-            "gcpSpend" to 76.2,
-            "awsChange" to 2.0,
-            "azureChange" to 8.0,
-            "gcpChange" to -1.0,
-            "cloudsConnected" to 3,
-            "overBudget" to false
-        )).await()
+        com.google.android.gms.tasks.Tasks.await(
+            db.collection("dashboard").document("current").set(mapOf(
+                "totalSpend" to 317.0,
+                "awsSpend" to 142.5,
+                "azureSpend" to 98.3,
+                "gcpSpend" to 76.2,
+                "awsChange" to 2.0,
+                "azureChange" to 8.0,
+                "gcpChange" to -1.0,
+                "cloudsConnected" to 3,
+                "overBudget" to false
+            ))
+        )
 
         // Budget
-        db.collection("budget").document("current").set(mapOf(
-            "totalBudget" to 500.0,
-            "awsAllocated" to 225.0,
-            "awsSpent" to 142.5,
-            "azureAllocated" to 155.0,
-            "azureSpent" to 98.3,
-            "gcpAllocated" to 120.0,
-            "gcpSpent" to 76.2
-        )).await()
+        com.google.android.gms.tasks.Tasks.await(
+            db.collection("budget").document("current").set(mapOf(
+                "totalBudget" to 500.0,
+                "awsAllocated" to 225.0,
+                "awsSpent" to 142.5,
+                "azureAllocated" to 155.0,
+                "azureSpent" to 98.3,
+                "gcpAllocated" to 120.0,
+                "gcpSpent" to 76.2
+            ))
+        )
 
         // Waste
-        db.collection("waste").document("current").set(mapOf(
-            "totalWaste" to 52.9,
-            "items" to listOf(
-                mapOf("provider" to "aws", "resourceName" to "EC2 t2.medium", "description" to "Running 24/7 — avg CPU below 5%", "monthlySaving" to 28.5, "recommendation" to "Resize to t2.micro or stop instance"),
-                mapOf("provider" to "azure", "resourceName" to "Standard_D2s VM", "description" to "Idle VM — 0 active connections in 7 days", "monthlySaving" to 14.2, "recommendation" to "Deallocate VM or enable auto-shutdown"),
-                mapOf("provider" to "gcp", "resourceName" to "n1-standard-2 Instance", "description" to "Dev instance left running over weekend", "monthlySaving" to 10.2, "recommendation" to "Enable auto-shutdown schedules")
-            )
-        )).await()
+        com.google.android.gms.tasks.Tasks.await(
+            db.collection("waste").document("current").set(mapOf(
+                "totalWaste" to 52.9,
+                "items" to listOf(
+                    mapOf("provider" to "aws", "resourceName" to "EC2 t2.medium", "description" to "Running 24/7 — avg CPU below 5%", "monthlySaving" to 28.5, "recommendation" to "Resize to t2.micro or stop instance"),
+                    mapOf("provider" to "azure", "resourceName" to "Standard_D2s VM", "description" to "Idle VM — 0 active connections in 7 days", "monthlySaving" to 14.2, "recommendation" to "Deallocate VM or enable auto-shutdown"),
+                    mapOf("provider" to "gcp", "resourceName" to "n1-standard-2 Instance", "description" to "Dev instance left running over weekend", "monthlySaving" to 10.2, "recommendation" to "Enable auto-shutdown schedules")
+                )
+            ))
+        )
 
         // Trends
-        db.collection("trends").document("current").set(mapOf(
-            "avgDaily" to 4.75,
-            "projected" to 142.5,
-            "dailySpends" to listOf(
-                mapOf("date" to "Mon", "aws" to 3.2, "azure" to 2.1, "gcp" to 1.5),
-                mapOf("date" to "Tue", "aws" to 4.1, "azure" to 2.5, "gcp" to 1.8),
-                mapOf("date" to "Wed", "aws" to 3.8, "azure" to 3.0, "gcp" to 1.6),
-                mapOf("date" to "Thu", "aws" to 5.2, "azure" to 2.8, "gcp" to 2.0),
-                mapOf("date" to "Fri", "aws" to 3.5, "azure" to 2.3, "gcp" to 1.9),
-                mapOf("date" to "Sat", "aws" to 2.9, "azure" to 2.7, "gcp" to 1.7),
-                mapOf("date" to "Sun", "aws" to 3.3, "azure" to 2.5, "gcp" to 1.8)
-            )
-        )).await()
+        com.google.android.gms.tasks.Tasks.await(
+            db.collection("trends").document("current").set(mapOf(
+                "avgDaily" to 4.75,
+                "projected" to 142.5,
+                "dailySpends" to listOf(
+                    mapOf("date" to "Mon", "aws" to 3.2, "azure" to 2.1, "gcp" to 1.5),
+                    mapOf("date" to "Tue", "aws" to 4.1, "azure" to 2.5, "gcp" to 1.8),
+                    mapOf("date" to "Wed", "aws" to 3.8, "azure" to 3.0, "gcp" to 1.6),
+                    mapOf("date" to "Thu", "aws" to 5.2, "azure" to 2.8, "gcp" to 2.0),
+                    mapOf("date" to "Fri", "aws" to 3.5, "azure" to 2.3, "gcp" to 1.9),
+                    mapOf("date" to "Sat", "aws" to 2.9, "azure" to 2.7, "gcp" to 1.7),
+                    mapOf("date" to "Sun", "aws" to 3.3, "azure" to 2.5, "gcp" to 1.8)
+                )
+            ))
+        )
 
         // Alerts
-        db.collection("alerts").document("alert1").set(mapOf(
-            "severity" to "critical", "title" to "EC2 Cost Spike Detected",
-            "description" to "EC2 spend up 67% in 24 hours: \$18 above daily average",
-            "provider" to "aws", "timeAgo" to "2h ago"
-        )).await()
-        db.collection("alerts").document("alert2").set(mapOf(
-            "severity" to "warning", "title" to "Approaching Budget Limit",
-            "description" to "Azure used 63% of its \$155.00 allocated budget",
-            "provider" to "azure", "timeAgo" to "6h ago"
-        )).await()
-        db.collection("alerts").document("alert3").set(mapOf(
-            "severity" to "ok", "title" to "GCP Spend On Track",
-            "description" to "GCP spent \$76.20 of \$120.00 budget",
-            "provider" to "gcp", "timeAgo" to "1d ago"
-        )).await()
+        com.google.android.gms.tasks.Tasks.await(
+            db.collection("alerts").document("alert1").set(mapOf(
+                "severity" to "critical", "title" to "EC2 Cost Spike Detected",
+                "description" to "EC2 spend up 67% in 24 hours: \$18 above daily average",
+                "provider" to "aws", "timeAgo" to "2h ago"
+            ))
+        )
+        com.google.android.gms.tasks.Tasks.await(
+            db.collection("alerts").document("alert2").set(mapOf(
+                "severity" to "warning", "title" to "Approaching Budget Limit",
+                "description" to "Azure used 63% of its \$155.00 allocated budget",
+                "provider" to "azure", "timeAgo" to "6h ago"
+            ))
+        )
+        com.google.android.gms.tasks.Tasks.await(
+            db.collection("alerts").document("alert3").set(mapOf(
+                "severity" to "ok", "title" to "GCP Spend On Track",
+                "description" to "GCP spent \$76.20 of \$120.00 budget",
+                "provider" to "gcp", "timeAgo" to "1d ago"
+            ))
+        )
     }
 }
