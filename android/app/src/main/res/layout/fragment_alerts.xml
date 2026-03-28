@@ -10,9 +10,9 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
                 android:text="Alerts ⚡" android:textColor="@color/text_headline"
                 android:textSize="24sp" android:textStyle="bold"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            <TextView android:id="@+id/tvActiveCount" android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="12dp" android:paddingVertical="6dp"
-                android:text="3 ACTIVE" android:textColor="@color/secondary" android:textSize="12sp" android:textStyle="bold"/>
+                android:text="0 ACTIVE" android:textColor="@color/secondary" android:textSize="12sp" android:textStyle="bold"/>
         </LinearLayout>
         <!-- Filter Pills -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -30,75 +30,13 @@
                 android:layout_marginStart="8dp" android:background="@drawable/bg_surface_container_low" android:gravity="center"
                 android:text="GCP" android:textColor="@color/on_surface_variant" android:textSize="13sp"/>
         </LinearLayout>
-        <!-- Alert 1: Critical -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_alert_critical"
-            android:padding="20dp" android:layout_marginBottom="12dp">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:background="@drawable/bg_chip_error" android:paddingHorizontal="8dp" android:paddingVertical="2dp"
-                    android:text="🔴 CRITICAL" android:textColor="@color/error" android:textSize="10sp" android:textStyle="bold"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="2h ago" android:textColor="@color/text_label" android:textSize="11sp"/>
-            </LinearLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="EC2 Cost Spike Detected" android:textColor="@color/text_headline"
-                android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="EC2 spend up 67% in 24 hours: $18 above daily average" android:textColor="@color/on_surface_variant"
-                android:textSize="13sp" android:layout_marginTop="4dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="View Details →" android:textColor="@color/primary" android:textSize="13sp"
-                android:textStyle="bold" android:layout_marginTop="8dp"/>
-        </LinearLayout>
-        <!-- Alert 2: Warning -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_glass_card"
-            android:padding="20dp" android:layout_marginBottom="12dp">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:background="@drawable/bg_chip_tertiary" android:paddingHorizontal="8dp" android:paddingVertical="2dp"
-                    android:text="🟡 WARNING" android:textColor="@color/tertiary" android:textSize="10sp" android:textStyle="bold"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="6h ago" android:textColor="@color/text_label" android:textSize="11sp"/>
-            </LinearLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Approaching Budget Limit" android:textColor="@color/text_headline"
-                android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Azure used 63% of its $155.00 allocated budget" android:textColor="@color/on_surface_variant"
-                android:textSize="13sp" android:layout_marginTop="4dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="View Budget →" android:textColor="@color/primary" android:textSize="13sp"
-                android:textStyle="bold" android:layout_marginTop="8dp"/>
-        </LinearLayout>
-        <!-- Alert 3: OK -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:background="@drawable/bg_glass_card"
-            android:padding="20dp" android:layout_marginBottom="24dp">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="8dp" android:paddingVertical="2dp"
-                    android:text="🟢 OK" android:textColor="@color/secondary" android:textSize="10sp" android:textStyle="bold"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="1d ago" android:textColor="@color/text_label" android:textSize="11sp"/>
-            </LinearLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="GCP Spend On Track" android:textColor="@color/text_headline"
-                android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="GCP spent $76.20 of $120.00 budget" android:textColor="@color/on_surface_variant"
-                android:textSize="13sp" android:layout_marginTop="4dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="View Breakdown →" android:textColor="@color/primary" android:textSize="13sp"
-                android:textStyle="bold" android:layout_marginTop="8dp"/>
-        </LinearLayout>
+        <!-- Dynamic alerts container -->
+        <LinearLayout android:id="@+id/alertsContainer"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"/>
         <!-- System Status -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal" android:layout_marginBottom="24dp">
+            android:orientation="horizontal" android:layout_marginTop="16dp" android:layout_marginBottom="24dp">
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
                 android:orientation="vertical" android:background="@drawable/bg_glass_card" android:padding="16dp"
                 android:layout_marginEnd="6dp" android:gravity="center">

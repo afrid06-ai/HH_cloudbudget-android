@@ -36,16 +36,16 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AWS Instance" android:textColor="@color/text_headline" android:textSize="15sp" android:textStyle="bold"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cloud Infrastructure" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
                 </LinearLayout>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="✅ ON TRACK" android:textColor="@color/secondary" android:textSize="10sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvAwsStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="✅ ON TRACK" android:textColor="@color/secondary" android:textSize="10sp" android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
                 <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Allocated: $225.00" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $142.50" android:textColor="@color/tertiary" android:textSize="14sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvAwsBudgetSpent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $142.50" android:textColor="@color/tertiary" android:textSize="14sp" android:textStyle="bold"/>
             </LinearLayout>
             <FrameLayout android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="12dp" android:background="@drawable/bg_progress_track">
                 <View android:id="@+id/awsProgressBar" android:layout_width="0dp" android:layout_height="match_parent" android:background="@drawable/bg_progress_fill"/>
             </FrameLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$82.50 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
+            <TextView android:id="@+id/tvAwsRemaining" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$82.50 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
         </LinearLayout>
         <!-- Azure -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -57,16 +57,16 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Azure Services" android:textColor="@color/text_headline" android:textSize="15sp" android:textStyle="bold"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Storage &amp; SQL" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
                 </LinearLayout>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_tertiary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="⚠️ MONITOR" android:textColor="@color/tertiary" android:textSize="10sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvAzureStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_tertiary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="⚠️ MONITOR" android:textColor="@color/tertiary" android:textSize="10sp" android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
                 <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Allocated: $155.00" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $98.30" android:textColor="@color/primary" android:textSize="14sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvAzureBudgetSpent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $98.30" android:textColor="@color/primary" android:textSize="14sp" android:textStyle="bold"/>
             </LinearLayout>
             <FrameLayout android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="12dp" android:background="@drawable/bg_progress_track">
                 <View android:id="@+id/azureProgressBar" android:layout_width="0dp" android:layout_height="match_parent" android:background="@drawable/bg_progress_fill"/>
             </FrameLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$56.70 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
+            <TextView android:id="@+id/tvAzureRemaining" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$56.70 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
         </LinearLayout>
         <!-- GCP -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -78,16 +78,16 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GCP Platform" android:textColor="@color/text_headline" android:textSize="15sp" android:textStyle="bold"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AI &amp; Analytics" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
                 </LinearLayout>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="✅ ON TRACK" android:textColor="@color/secondary" android:textSize="10sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvGcpStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip_secondary" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="✅ ON TRACK" android:textColor="@color/secondary" android:textSize="10sp" android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
                 <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Allocated: $120.00" android:textColor="@color/on_surface_variant" android:textSize="12sp"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $76.20" android:textColor="@color/secondary" android:textSize="14sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvGcpBudgetSpent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spent: $76.20" android:textColor="@color/secondary" android:textSize="14sp" android:textStyle="bold"/>
             </LinearLayout>
             <FrameLayout android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="12dp" android:background="@drawable/bg_progress_track">
                 <View android:id="@+id/gcpProgressBar" android:layout_width="0dp" android:layout_height="match_parent" android:background="@drawable/bg_progress_fill"/>
             </FrameLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$43.80 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
+            <TextView android:id="@+id/tvGcpRemaining" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$43.80 remaining · 63% used" android:textColor="@color/secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
