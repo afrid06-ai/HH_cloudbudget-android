@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.cloudbudget.app.R
 import com.cloudbudget.app.MainActivity
 import com.cloudbudget.app.data.DemoPreferences
+import com.cloudbudget.app.ui.auth.CloudCredentialsActivity
 import com.cloudbudget.app.ui.auth.LoginActivity
 import com.cloudbudget.app.ui.onboarding.OnboardingActivity
 
@@ -102,6 +103,11 @@ class SplashActivity : AppCompatActivity() {
         // Navigate after animations complete (demo: resume session if already logged in)
         handler.postDelayed({
             when {
+                DemoPreferences.isLoggedIn(this) && !DemoPreferences.hasCompletedCredentialsSetup(this) ->
+                    startActivity(
+                        Intent(this, CloudCredentialsActivity::class.java)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
                 DemoPreferences.isLoggedIn(this) ->
                     startActivity(
                         Intent(this, MainActivity::class.java)

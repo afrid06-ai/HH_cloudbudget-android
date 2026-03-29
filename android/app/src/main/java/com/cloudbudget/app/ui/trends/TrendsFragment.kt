@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cloudbudget.app.R
-import com.cloudbudget.app.ui.util.bindStitchHeader
+import com.cloudbudget.app.ui.util.bindDrawerMenu
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -84,7 +84,7 @@ class TrendsFragment : Fragment() {
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
         }
 
-        bindStitchHeader(view)
+        bindDrawerMenu(view)
     }
 
     private fun makeLineSet(entries: List<Entry>, label: String, color: String): LineDataSet {

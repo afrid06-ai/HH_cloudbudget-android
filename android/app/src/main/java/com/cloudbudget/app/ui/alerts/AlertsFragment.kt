@@ -17,7 +17,7 @@ import androidx.lifecycle.viewModelScope
 import com.cloudbudget.app.R
 import com.cloudbudget.app.data.firebase.FirestoreRepository
 import com.cloudbudget.app.ui.detail.AlertDetailActivity
-import com.cloudbudget.app.ui.util.bindStitchHeader
+import com.cloudbudget.app.ui.util.bindDrawerMenu
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
@@ -100,7 +100,7 @@ class AlertsFragment : Fragment() {
         }
 
         styleFilters(filterProvider)
-        bindStitchHeader(view)
+        bindDrawerMenu(view)
     }
 
     private fun buildAlertCard(alert: FirestoreRepository.AlertItem): View {

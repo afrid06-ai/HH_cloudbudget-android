@@ -13,9 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cloudbudget.app.MainActivity
 import com.cloudbudget.app.R
+import com.cloudbudget.app.ui.auth.CloudCredentialsActivity
 import com.cloudbudget.app.ui.detail.CloudDetailActivity
-import com.cloudbudget.app.ui.settings.ProfileActivity
-import com.cloudbudget.app.ui.settings.SettingsActivity
+import com.cloudbudget.app.ui.util.bindDrawerMenu
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -90,11 +90,10 @@ class DashboardFragment : Fragment() {
             (activity as? MainActivity)?.selectTab(R.id.nav_budget)
         }
 
-        view.findViewById<View>(R.id.btnSettings).setOnClickListener {
-            startActivity(Intent(requireContext(), SettingsActivity::class.java))
-        }
-        view.findViewById<View>(R.id.btnProfileHeader).setOnClickListener {
-            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+        bindDrawerMenu(view)
+
+        view.findViewById<View>(R.id.btnConnectClouds).setOnClickListener {
+            startActivity(Intent(requireContext(), CloudCredentialsActivity::class.java))
         }
         view.findViewById<View>(R.id.cardAws).setOnClickListener {
             startActivity(CloudDetailActivity.intent(requireContext(), "aws"))

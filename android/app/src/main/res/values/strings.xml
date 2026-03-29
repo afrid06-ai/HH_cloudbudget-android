@@ -62,14 +62,28 @@
 
     <!-- Stitch flow — auth & settings -->
     <string name="sign_in_subtitle">Sign in to sync billing across AWS, Azure &amp; GCP.</string>
+    <string name="sign_up_subtitle">Create an account to track spend across AWS, Azure &amp; GCP.</string>
     <string name="email">Email</string>
     <string name="email_hint">you@company.com</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="display_name">Full name</string>
+    <string name="display_name_hint">e.g. Lakshmi Niharika</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_account">Create account</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="skip_to_dashboard">Skip to dashboard (demo)</string>
     <string name="no_account_register">No account? Register</string>
+    <string name="already_have_account">Already have an account? Sign in</string>
+    <string name="error_password_mismatch">Passwords do not match.</string>
+    <string name="error_password_short">Use at least 6 characters for your password.</string>
+    <string name="error_fill_all_signup">Enter name, email, and password.</string>
+    <string name="error_fill_login">Enter email and password.</string>
+    <string name="error_register_first">No account yet. Switch to Sign up or use Skip to dashboard.</string>
+    <string name="error_wrong_credentials">Email or password is incorrect.</string>
+    <string name="account_created_demo">Account created. Connect your clouds next.</string>
     <string name="cloud_credentials_blurb">Connect read-only billing access. Keys stay on this device until you connect a backend.</string>
     <string name="access_key_id">Access key ID</string>
     <string name="tenant_id_hint">Tenant / subscription ID</string>
@@ -109,6 +123,10 @@
     <string name="cloud_detail_gcp_body">Compute Engine and BigQuery usage. Check billing export for project-level detail.</string>
     <string name="enter_email_demo">Enter an email for the demo, or tap Skip to dashboard.</string>
     <string name="log_out">Log out</string>
+    <string name="logged_out_message">You have been signed out.</string>
+    <string name="drawer_guest_hint">Demo session · sign in to show email</string>
+    <string name="nav_drawer_open">Open navigation</string>
+    <string name="nav_drawer_close">Close navigation</string>
     <string name="demo_auto_allocate">Demo: budgets reweighted across clouds (Firebase data unchanged).</string>
     <string name="edit_profile_demo_msg">Hackathon demo: profile edits would sync to your identity provider. No data sent in this build.</string>
     <string name="security_demo_password">Demo only: connect Auth0 / Cognito / Firebase Auth here for production.</string>

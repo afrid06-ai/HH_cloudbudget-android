@@ -11,6 +11,11 @@ object DemoPreferences {
     private const val KEY_NOTIF_BUDGET = "notif_budget"
     private const val KEY_NOTIF_WASTE = "notif_waste"
     private const val KEY_NOTIF_ANOMALY = "notif_anomaly"
+    private const val KEY_CREDENTIALS_SETUP = "credentials_setup"
+    /** Demo local account (not production auth — hackathon only). */
+    private const val KEY_REGISTERED_EMAIL = "registered_email"
+    private const val KEY_REGISTERED_PASSWORD = "registered_password"
+    private const val KEY_REGISTERED_NAME = "registered_name"
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE)
 
@@ -34,7 +39,42 @@ object DemoPreferences {
     fun setNotifWaste(ctx: Context, v: Boolean) = prefs(ctx).edit().putBoolean(KEY_NOTIF_WASTE, v).apply()
     fun setNotifAnomaly(ctx: Context, v: Boolean) = prefs(ctx).edit().putBoolean(KEY_NOTIF_ANOMALY, v).apply()
 
+    fun hasCompletedCredentialsSetup(ctx: Context) = prefs(ctx).getBoolean(KEY_CREDENTIALS_SETUP, false)
+
+    fun setCredentialsSetupDone(ctx: Context, value: Boolean) {
+        prefs(ctx).edit().putBoolean(KEY_CREDENTIALS_SETUP, value).apply()
+    }
+
     fun clearSession(ctx: Context) {
-        prefs(ctx).edit().putBoolean(KEY_LOGGED_IN, false).apply()
+        prefs(ctx).edit()
+            .putBoolean(KEY_LOGGED_IN, false)
+            .putBoolean(KEY_CREDENTIALS_SETUP, false)
+            .apply()
+    }
+
+    fun hasRegisteredUser(ctx: Context): Boolean {
+        val e = prefs(ctx).getString(KEY_REGISTERED_EMAIL, null)
+        return !e.isNullOrBlank()
+    }
+
+    fun getRegisteredEmail(ctx: Context): String =
+        prefs(ctx).getString(KEY_REGISTERED_EMAIL, "") ?: ""
+
+    fun getRegisteredName(ctx: Context): String =
+        prefs(ctx).getString(KEY_REGISTERED_NAME, "") ?: ""
+
+    /** Saves demo account locally. Password stored in plain text — demo only. */
+    fun registerDemoUser(ctx: Context, email: String, password: String, displayName: String) {
+        prefs(ctx).edit()
+            .putString(KEY_REGISTERED_EMAIL, email.trim().lowercase())
+            .putString(KEY_REGISTERED_PASSWORD, password)
+            .putString(KEY_REGISTERED_NAME, displayName.trim())
+            .apply()
+    }
+
+    fun validateDemoLogin(ctx: Context, email: String, password: String): Boolean {
+        val savedEmail = prefs(ctx).getString(KEY_REGISTERED_EMAIL, null) ?: return false
+        val savedPass = prefs(ctx).getString(KEY_REGISTERED_PASSWORD, null) ?: return false
+        return savedEmail == email.trim().lowercase() && savedPass == password
     }
 }

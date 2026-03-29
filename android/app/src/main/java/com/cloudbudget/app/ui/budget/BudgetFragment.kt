@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cloudbudget.app.R
-import com.cloudbudget.app.ui.util.bindStitchHeader
+import com.cloudbudget.app.ui.util.bindDrawerMenu
 
 class BudgetFragment : Fragment() {
 
@@ -51,7 +51,7 @@ class BudgetFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.demo_auto_allocate, Toast.LENGTH_LONG).show()
         }
 
-        bindStitchHeader(view)
+        bindDrawerMenu(view)
     }
 
     private fun setProgress(bar: View, spent: Double, allocated: Double) {

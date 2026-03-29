@@ -21,6 +21,17 @@
             android:paddingBottom="16dp">
 
             <TextView
+                android:id="@+id/btnOpenDrawer"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:text="☰"
+                android:textColor="@color/on_surface"
+                android:textSize="22sp" />
+
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -29,47 +40,6 @@
                 android:textColor="@color/on_surface"
                 android:textSize="22sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/btnHeaderSettings"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginEnd="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:gravity="center"
-                android:text="⚙"
-                android:textColor="@color/on_surface_variant"
-                android:textSize="20sp" />
-
-            <FrameLayout
-                android:id="@+id/btnHeaderProfile"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_gradient_button" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="RJ"
-                    android:textColor="@color/on_primary_fixed"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="end|bottom"
-                    android:background="@drawable/dot_online" />
-            </FrameLayout>
 
             <TextView
                 android:id="@+id/tvActiveCount"

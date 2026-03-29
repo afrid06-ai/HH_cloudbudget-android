@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_drawer_profile"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_drawer_settings"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_drawer_manage_clouds"
+            android:title="@string/manage_clouds" />
+        <item
+            android:id="@+id/nav_drawer_credentials"
+            android:title="@string/cloud_credentials" />
+    </group>
+    <group
+        android:id="@+id/nav_drawer_group_session"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_drawer_logout"
+            android:title="@string/log_out" />
+    </group>
+</menu>
