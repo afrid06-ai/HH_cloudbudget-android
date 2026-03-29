@@ -1,7 +1,6 @@
 package com.cloudbudget.app.data.firebase
 
 import com.cloudbudget.app.BuildConfig
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -15,9 +14,7 @@ object FirestoreRepository {
 
     private val db = FirebaseFirestore.getInstance()
 
-    /** Authenticated users read/write their own doc; guests (e.g. Skip to app) use the build-config demo id. */
-    private fun userId(): String =
-        FirebaseAuth.getInstance().currentUser?.uid ?: BuildConfig.FIRESTORE_USER_ID
+    private fun userId(): String = BuildConfig.FIRESTORE_USER_ID
 
     private fun userRef() = db.collection("users").document(userId())
 

@@ -1,7 +1,6 @@
 package com.cloudbudget.app.data
 
 import android.content.Context
-import com.google.firebase.auth.FirebaseAuth
 
 /** Local prefs for hackathon demo flows (no server). */
 object DemoPreferences {
@@ -47,7 +46,6 @@ object DemoPreferences {
     }
 
     fun clearSession(ctx: Context) {
-        FirebaseAuth.getInstance().signOut()
         prefs(ctx).edit()
             .putBoolean(KEY_LOGGED_IN, false)
             .putBoolean(KEY_CREDENTIALS_SETUP, false)
