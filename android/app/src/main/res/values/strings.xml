@@ -97,6 +97,13 @@
     <string name="error_register_first">No account yet. Switch to Sign up or use Skip to dashboard.</string>
     <string name="error_wrong_credentials">Email or password is incorrect.</string>
     <string name="account_created_demo">Account created. Connect your clouds next.</string>
+    <string name="auth_creating_account">Creating account…</string>
+    <string name="auth_signing_in">Signing in…</string>
+    <string name="auth_signup_failed">Could not create account.</string>
+    <string name="auth_profile_save_failed">Could not save profile: %1$s</string>
+    <string name="auth_email_in_use">This email is already registered. Sign in instead.</string>
+    <string name="auth_signup_failed_msg">Sign up failed: %1$s</string>
+    <string name="auth_login_failed">Login failed: %1$s</string>
     <string name="cloud_credentials_blurb">Connect read-only billing access. Keys stay on this device until you connect a backend.</string>
     <string name="access_key_id">Access key ID</string>
     <string name="tenant_id_hint">Tenant / subscription ID</string>

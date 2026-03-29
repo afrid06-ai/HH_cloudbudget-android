@@ -11,6 +11,7 @@ import com.cloudbudget.app.BuildConfig
 import com.cloudbudget.app.MainActivity
 import com.cloudbudget.app.R
 import com.cloudbudget.app.data.DemoPreferences
+import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONObject
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
@@ -19,7 +20,8 @@ import java.net.URL
 class CloudCredentialsActivity : AppCompatActivity() {
 
     private val apiBase = BuildConfig.API_BASE_URL
-    private val userId = BuildConfig.FIRESTORE_USER_ID
+    private val userId: String
+        get() = FirebaseAuth.getInstance().currentUser?.uid ?: BuildConfig.FIRESTORE_USER_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

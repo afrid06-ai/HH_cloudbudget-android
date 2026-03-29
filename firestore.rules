@@ -1,0 +1,35 @@
+rules_version = '2';
+// Paste into Firebase Console → Firestore → Rules → Publish
+// New sign-ups create users/{firebaseAuthUid} — NOT user_006. The UID is a long string;
+// find it under Authentication → Users → User UID, then look for that document id here.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      // Demo/guest app reads seeded demo user without signing in
+      allow read: if userId == "user_001"
+        || (request.auth != null && request.auth.uid == userId);
+      // Only the signed-in user may create/update their own profile + cloudData
+      allow create, update, delete: if request.auth != null
+        && request.auth.uid == userId;
+    }
+
+    // Legacy flat collections used when user doc has no cloudData (incl. guest + seed)
+    match /budget/{document=**} {
+      allow read, write: if true;
+    }
+    match /dashboard/{document=**} {
+      allow read, write: if true;
+    }
+    match /waste/{document=**} {
+      allow read, write: if true;
+    }
+    match /trends/{document=**} {
+      allow read, write: if true;
+    }
+    match /alerts/{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

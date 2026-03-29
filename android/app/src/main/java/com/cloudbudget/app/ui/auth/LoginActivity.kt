@@ -12,12 +12,20 @@ import com.cloudbudget.app.BuildConfig
 import com.cloudbudget.app.MainActivity
 import com.cloudbudget.app.R
 import com.cloudbudget.app.data.DemoPreferences
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
-/** Login + sign up — all auth stored in Firebase Firestore. */
+/**
+ * Sign up creates a **Firebase Authentication** user (visible in Console → Authentication)
+ * and a Firestore profile at `users/{uid}` (no password stored in Firestore).
+ * Sign in uses Firebase Auth; legacy email/password on `users/user_001` is still accepted for older seeds.
+ */
 class LoginActivity : AppCompatActivity() {
 
+    private val auth get() = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private var isSignUpMode = false
 
@@ -110,7 +118,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun userRef() = db.collection("users").document(BuildConfig.FIRESTORE_USER_ID)
+    private fun resetPrimaryButton() {
+        btnPrimary.isEnabled = true
+        btnPrimary.setText(if (isSignUpMode) R.string.create_account else R.string.sign_in)
+    }
 
     private fun doSignUp() {
         val name = etName.text?.toString().orEmpty().trim()
@@ -132,30 +143,45 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnPrimary.isEnabled = false
-        btnPrimary.text = "Creating account..."
+        btnPrimary.text = getString(R.string.auth_creating_account)
 
-        // Save auth + profile to Firestore
-        val authData = mapOf(
-            "displayName" to name,
-            "email" to email.lowercase(),
-            "password" to pass,
-            "createdAt" to com.google.firebase.Timestamp.now()
-        )
-
-        userRef().set(authData, SetOptions.merge())
-            .addOnSuccessListener {
-                // Also save locally for session
-                DemoPreferences.registerDemoUser(this, email, pass, name)
-                Toast.makeText(this, R.string.account_created_demo, Toast.LENGTH_SHORT).show()
-                btnPrimary.isEnabled = true
-                setSignUpMode(false)
-                etEmail.setText(email)
-                etPassword.setText("")
+        auth.createUserWithEmailAndPassword(email, pass)
+            .addOnSuccessListener { result ->
+                val uid = result.user?.uid ?: run {
+                    resetPrimaryButton()
+                    Toast.makeText(this, R.string.auth_signup_failed, Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+                val profile = mapOf(
+                    "displayName" to name,
+                    "email" to email.lowercase(),
+                    "createdAt" to com.google.firebase.Timestamp.now()
+                )
+                db.collection("users").document(uid).set(profile, SetOptions.merge())
+                    .addOnSuccessListener {
+                        DemoPreferences.registerDemoUser(this, email, pass, name)
+                        Toast.makeText(this, R.string.account_created_demo, Toast.LENGTH_SHORT).show()
+                        resetPrimaryButton()
+                        startActivity(Intent(this, CloudCredentialsActivity::class.java))
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        resetPrimaryButton()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.auth_profile_save_failed, e.message ?: ""),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
             }
             .addOnFailureListener { e ->
-                btnPrimary.isEnabled = true
-                btnPrimary.setText(R.string.create_account)
-                Toast.makeText(this, "Signup failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                resetPrimaryButton()
+                val msg = when {
+                    e.message?.contains("already in use", ignoreCase = true) == true ->
+                        getString(R.string.auth_email_in_use)
+                    else -> getString(R.string.auth_signup_failed_msg, e.message ?: "")
+                }
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
             }
     }
 
@@ -169,58 +195,97 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnPrimary.isEnabled = false
-        btnPrimary.text = "Signing in..."
+        btnPrimary.text = getString(R.string.auth_signing_in)
 
-        // Validate against Firestore
-        userRef().get()
-            .addOnSuccessListener { doc ->
-                btnPrimary.isEnabled = true
-                btnPrimary.setText(R.string.sign_in)
-
-                if (!doc.exists()) {
-                    Toast.makeText(this, "No account found. Please sign up first.", Toast.LENGTH_SHORT).show()
+        auth.signInWithEmailAndPassword(email, pass)
+            .addOnSuccessListener { result ->
+                val uid = result.user?.uid ?: run {
+                    resetPrimaryButton()
+                    Toast.makeText(this, R.string.error_wrong_credentials, Toast.LENGTH_SHORT).show()
                     return@addOnSuccessListener
                 }
-
-                val data = doc.data ?: run {
-                    Toast.makeText(this, "No account found. Please sign up first.", Toast.LENGTH_SHORT).show()
-                    return@addOnSuccessListener
-                }
-
-                val savedEmail = (data["email"] as? String)?.lowercase() ?: ""
-                val savedPass = data["password"] as? String ?: ""
-                val savedName = data["displayName"] as? String ?: ""
-
-                if (savedEmail.isEmpty() || savedPass.isEmpty()) {
-                    Toast.makeText(this, "No account found. Please sign up first.", Toast.LENGTH_SHORT).show()
-                    return@addOnSuccessListener
-                }
-
-                if (email.lowercase() != savedEmail || pass != savedPass) {
-                    Toast.makeText(this, "Incorrect email or password.", Toast.LENGTH_SHORT).show()
-                    return@addOnSuccessListener
-                }
-
-                // Login success — save session locally
-                DemoPreferences.setLoggedIn(this, true)
-                DemoPreferences.registerDemoUser(this, savedEmail, savedPass, savedName)
-
-                // Check cloud data → Dashboard or Credentials
-                val hasCloudData = data.containsKey("cloudData")
-                if (hasCloudData) {
-                    DemoPreferences.setCredentialsSetupDone(this, true)
-                    startActivity(Intent(this, MainActivity::class.java)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
-                } else {
-                    startActivity(Intent(this, CloudCredentialsActivity::class.java))
-                }
-                finish()
+                db.collection("users").document(uid).get()
+                    .addOnSuccessListener { doc ->
+                        resetPrimaryButton()
+                        val data = doc.data
+                        completeLoginWithProfileData(data, email, pass)
+                    }
+                    .addOnFailureListener { e ->
+                        resetPrimaryButton()
+                        Toast.makeText(this, getString(R.string.auth_login_failed, e.message ?: ""), Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener { e ->
-                btnPrimary.isEnabled = true
-                btnPrimary.setText(R.string.sign_in)
-                Toast.makeText(this, "Login failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                when (e) {
+                    is FirebaseAuthInvalidUserException ->
+                        tryLegacyFirestoreSignIn(email, pass)
+                    is FirebaseAuthInvalidCredentialsException -> {
+                        resetPrimaryButton()
+                        Toast.makeText(this, R.string.error_wrong_credentials, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        resetPrimaryButton()
+                        Toast.makeText(this, getString(R.string.auth_login_failed, e.message ?: ""), Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
+    }
+
+    /** Older hackathon seeds used email/password fields on `users/user_001` only (no Auth user). */
+    private fun tryLegacyFirestoreSignIn(email: String, pass: String) {
+        db.collection("users").document(BuildConfig.FIRESTORE_USER_ID).get()
+            .addOnSuccessListener { doc ->
+                resetPrimaryButton()
+                if (!doc.exists()) {
+                    Toast.makeText(this, R.string.error_register_first, Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+                val data = doc.data ?: run {
+                    Toast.makeText(this, R.string.error_register_first, Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+                val savedEmail = (data["email"] as? String)?.lowercase() ?: ""
+                val savedPass = data["password"] as? String ?: ""
+                if (savedEmail.isEmpty() || savedPass.isEmpty()) {
+                    Toast.makeText(this, R.string.error_register_first, Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+                if (email.lowercase() != savedEmail || pass != savedPass) {
+                    Toast.makeText(this, R.string.error_wrong_credentials, Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+                completeLoginWithProfileData(data, email, pass)
+            }
+            .addOnFailureListener { e ->
+                resetPrimaryButton()
+                Toast.makeText(this, getString(R.string.auth_login_failed, e.message ?: ""), Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun resolveDisplayName(data: Map<String, Any>?, email: String): String {
+        val fromDoc = (data?.get("displayName") as? String).orEmpty().trim()
+        if (fromDoc.isNotEmpty()) return fromDoc
+        val localName = DemoPreferences.getRegisteredName(this).trim()
+        if (localName.isNotEmpty()) return localName
+        return email.substringBefore("@").ifEmpty { "User" }
+    }
+
+    private fun completeLoginWithProfileData(data: Map<String, Any>?, email: String, pass: String) {
+        val savedEmail = (data?.get("email") as? String)?.lowercase() ?: email.lowercase()
+        val savedName = resolveDisplayName(data, email)
+        DemoPreferences.setLoggedIn(this, true)
+        DemoPreferences.registerDemoUser(this, savedEmail, pass, savedName)
+        val hasCloudData = data?.containsKey("cloudData") == true
+        if (hasCloudData) {
+            DemoPreferences.setCredentialsSetupDone(this, true)
+            startActivity(
+                Intent(this, MainActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            )
+        } else {
+            startActivity(Intent(this, CloudCredentialsActivity::class.java))
+        }
+        finish()
     }
 
     private fun goMain() {
