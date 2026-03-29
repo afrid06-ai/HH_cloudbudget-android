@@ -63,6 +63,9 @@ object DemoPreferences {
     fun getRegisteredName(ctx: Context): String =
         prefs(ctx).getString(KEY_REGISTERED_NAME, "") ?: ""
 
+    fun getRegisteredPassword(ctx: Context): String =
+        prefs(ctx).getString(KEY_REGISTERED_PASSWORD, "") ?: ""
+
     /** Saves demo account locally. Password stored in plain text — demo only. */
     fun registerDemoUser(ctx: Context, email: String, password: String, displayName: String) {
         prefs(ctx).edit()

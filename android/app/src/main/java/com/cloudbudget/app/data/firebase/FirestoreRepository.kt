@@ -18,6 +18,74 @@ object FirestoreRepository {
 
     private fun userRef() = db.collection("users").document(userId())
 
+    // ─── User Profile ───
+    data class UserProfile(
+        val displayName: String = "",
+        val email: String = "",
+        val userId: String = ""
+    )
+
+    fun profileFlow(): Flow<UserProfile> = callbackFlow {
+        val reg = userRef().addSnapshotListener { snap, e ->
+            if (e != null) { trySend(UserProfile()); return@addSnapshotListener }
+            val d = snap?.takeIf { it.exists() }?.data
+            trySend(UserProfile(
+                displayName = (d?.get("displayName") as? String) ?: "",
+                email = (d?.get("email") as? String) ?: "",
+                userId = userId()
+            ))
+        }
+        awaitClose { reg.remove() }
+    }
+
+    fun updateProfile(name: String, email: String) {
+        userRef().update(
+            mapOf("displayName" to name, "email" to email)
+        )
+    }
+
+    fun saveProfileOnSignup(name: String, email: String) {
+        userRef().set(
+            mapOf("displayName" to name, "email" to email),
+            com.google.firebase.firestore.SetOptions.merge()
+        )
+    }
+
+    fun saveBudget(total: Double, aws: Double, azure: Double, gcp: Double) {
+        userRef().get().addOnSuccessListener { snap ->
+            val data = snap.data?.toMutableMap() ?: mutableMapOf()
+            data["totalBudget"] = total
+
+            val cloudData = (data["cloudData"] as? MutableMap<String, Any>)
+                ?: mutableMapOf<String, Any>()
+
+            fun updateProvider(key: String, allocated: Double) {
+                val provider = (cloudData[key] as? MutableMap<String, Any>)
+                    ?: mutableMapOf<String, Any>()
+                provider["allocatedBudget"] = allocated
+                cloudData[key] = provider
+            }
+
+            updateProvider("aws", aws)
+            updateProvider("azure", azure)
+            updateProvider("gcp", gcp)
+            data["cloudData"] = cloudData
+
+            // Also update legacy budget collection for backward compat
+            db.collection("budget").document("current").set(
+                mapOf(
+                    "totalBudget" to total,
+                    "awsAllocated" to aws,
+                    "azureAllocated" to azure,
+                    "gcpAllocated" to gcp
+                ),
+                com.google.firebase.firestore.SetOptions.merge()
+            )
+
+            userRef().set(data, com.google.firebase.firestore.SetOptions.merge())
+        }
+    }
+
     // ─── Dashboard ───
     data class DashboardData(
         val totalSpend: Double = 0.0,

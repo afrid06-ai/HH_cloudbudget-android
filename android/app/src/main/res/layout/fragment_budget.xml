@@ -73,16 +73,29 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/btnAutoAllocate"
+                android:id="@+id/btnEditBudget"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/bg_gradient_button"
                 android:gravity="center"
                 android:paddingHorizontal="28dp"
-                android:text="⚡ Auto allocate →"
+                android:text="✏️ Edit Budget"
                 android:textColor="@color/on_primary_fixed"
                 android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnAutoAllocate"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_glass_card_soft"
+                android:gravity="center"
+                android:paddingHorizontal="28dp"
+                android:text="⚡ Auto allocate →"
+                android:textColor="@color/secondary"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -160,6 +173,7 @@
                 android:layout_marginTop="12dp">
 
                 <TextView
+                    android:id="@+id/tvAwsAllocated"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -262,6 +276,7 @@
                 android:layout_marginTop="12dp">
 
                 <TextView
+                    android:id="@+id/tvAzureAllocated"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -364,6 +379,7 @@
                 android:layout_marginTop="12dp">
 
                 <TextView
+                    android:id="@+id/tvGcpAllocated"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
